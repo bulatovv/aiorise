@@ -20,12 +20,14 @@ def gen_api_request(name: str, meta: dict, returns_result: bool) -> tuple[str, C
     if returns_result:
         resp_type = name.removesuffix('Request') + 'Response'
         func_body = [
-            f"return {resp_type}.model_validate(await self._connection.send({send_args_dict}))"
+            f"request = {name}.model_validate({send_args_dict})",
+            f"return {resp_type}.model_validate(await self._connection.send(request.model_dump()))"
         ]
     else:
         resp_type = 'None'
         func_body = [
-            f"await self._connection.send({send_args_dict}, False)"
+            f"request = {name}.model_validate({send_args_dict})",
+            f"await self._connection.send(request.model_dump(), False)"
         ]
 
     func = gen_func(
@@ -42,6 +44,7 @@ def gen_api_request(name: str, meta: dict, returns_result: bool) -> tuple[str, C
 def gen_source_code(schema: dict) -> CodeBlocks:
     imports = [
         'from aiorise.api.response_types import *',
+        'from aiorise.api.request_types import *',
         'from aiorise.api.protocols import HaveApiConnection'
     ]
 
