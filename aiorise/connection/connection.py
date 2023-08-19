@@ -81,7 +81,6 @@ class HighriseWebApiConnection(BaseApiConnection):
         rid = self._generate_rid()
         payload["rid"] = rid
             
-        print(payload)
         await self._websocket.send(json.dumps(payload))
 
         if wait_for_resp:

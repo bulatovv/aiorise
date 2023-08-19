@@ -17,6 +17,5 @@ class HighriseWebApiClient(HighriseWebApiMethods):
 
     async def listen(self) -> AsyncIterable[AnyEvent]:
         async for event in self._connection.listen(): # type: ignore
-            print(event)
             yield EventWrapper.model_validate({'data': event}).data
             
