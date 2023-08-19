@@ -48,7 +48,12 @@ def gen_default_value(meta: dict, required: bool) -> str:
 
     return ''
 
-def gen_class(name: str, meta: dict) -> tuple[str, CodeBlocks]:
+def gen_class(
+    name: str,
+    ignore_props: list[str],
+    meta: dict
+) -> tuple[str, CodeBlocks]:
+    
     cls_def_start = f"class {name}(BaseModel):"
     docstring = f'"""{meta["description"]}"""' if meta.get("description") else ''
     
@@ -57,6 +62,7 @@ def gen_class(name: str, meta: dict) -> tuple[str, CodeBlocks]:
         + gen_type_hint(prop_meta, name in meta.get("required", []))
         + gen_default_value(prop_meta, name in meta.get("required", []))
         for name, prop_meta in meta["properties"].items()
+        if name not in ignore_props
     ]
 
     return (

@@ -21,7 +21,7 @@ def gen_source_code(schema: dict) -> CodeBlocks:
 
 
     object_classes = [
-        gen_class(obj_name, obj_schema)
+        gen_class(obj_name, [], obj_schema)
         for obj_name, obj_schema in schema['components']['schemas'].items()
         if obj_name not in [*pub_components, *sub_components]
     ]

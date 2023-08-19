@@ -3,7 +3,7 @@ from .codegen import get_by_ref, gen_class, unroll, CodeBlocks
 import json
 
 def gen_response_class(name: str, schema: dict) -> tuple[str, CodeBlocks]:
-    generated_cls = gen_class(name, schema)
+    generated_cls = gen_class(name, [], schema)
     
     generated_cls[1].insert(
         1, f'type: Literal["{name}"] = Field(alias="_type")'
