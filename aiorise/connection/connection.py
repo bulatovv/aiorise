@@ -97,6 +97,7 @@ class HighriseWebApiConnection(BaseApiConnection):
                 message = json.loads(message)
 
                 if rid := message.get("rid"):
+                    del message["rid"]
                     self._requests[rid].set_result(message)
                 else:
                     yield message

@@ -7,21 +7,18 @@ class EmoteResponse(BaseModel):
     """The successful response to a `EmoteRequest`."""
 
     type: Literal["EmoteResponse"] = Field(alias="_type")
-    rid: str | None = None
 
 
 class ChannelResponse(BaseModel):
     """A channel message has been successfully sent."""
 
     type: Literal["ChannelResponse"] = Field(alias="_type")
-    rid: str | None = None
 
 
 class GetRoomUsersResponse(BaseModel):
     """The list of users in the room, alongside their positions."""
 
     type: Literal["GetRoomUsersResponse"] = Field(alias="_type")
-    rid: str
     content: list[tuple[User, Position | AnchorPosition]]
 
 
@@ -29,7 +26,6 @@ class ReactionResponse(BaseModel):
     """A response to a successful reaction."""
 
     type: Literal["ReactionResponse"] = Field(alias="_type")
-    rid: str | None = None
 
 
 class GetWalletResponse(BaseModel):
@@ -37,63 +33,54 @@ class GetWalletResponse(BaseModel):
 
     type: Literal["GetWalletResponse"] = Field(alias="_type")
     content: list[CurrencyItem]
-    rid: str
 
 
 class TeleportResponse(BaseModel):
     """The successful response to a `TeleportRequest`."""
 
     type: Literal["TeleportResponse"] = Field(alias="_type")
-    rid: str | None = None
 
 
 class FloorHitResponse(BaseModel):
     """The successful response to a `FloorHitRequest`."""
 
     type: Literal["FloorHitResponse"] = Field(alias="_type")
-    rid: str | None = None
 
 
 class AnchorHitResponse(BaseModel):
     """The successful response to a `AnchorHitRequest`."""
 
     type: Literal["AnchorHitResponse"] = Field(alias="_type")
-    rid: str | None = None
 
 
 class KeepaliveResponse(BaseModel):
     """The successful response to a `KeepaliveRequest`."""
 
     type: Literal["KeepaliveResponse"] = Field(alias="_type")
-    rid: str | None = None
 
 
 class ModerateRoomResponse(BaseModel):
     """The successful response to a `ModerateRoomRequest`."""
 
     type: Literal["ModerateRoomResponse"] = Field(alias="_type")
-    rid: str | None = None
 
 
 class GetRoomPrivilegeResponse(BaseModel):
     """The room privileges for provided `user_id`."""
 
     type: Literal["GetRoomPrivilegeResponse"] = Field(alias="_type")
-    rid: str
 
 
 class ChangeRoomPrivilegeResponse(BaseModel):
     """The successful response to a `ChangeRoomPrivilegeRequest`."""
 
     type: Literal["ChangeRoomPrivilegeResponse"] = Field(alias="_type")
-    rid: str
 
 
 class MoveUserToRoomResponse(BaseModel):
     """The successful response to a `MoveUserToRoomRequest`."""
 
     type: Literal["MoveUserToRoomResponse"] = Field(alias="_type")
-    rid: str
 
 
 class CheckVoiceChatResponse(BaseModel):
@@ -105,7 +92,6 @@ class CheckVoiceChatResponse(BaseModel):
 
     type: Literal["CheckVoiceChatResponse"] = Field(alias="_type")
     seconds_left: int
-    rid: str
 
 
 class GetUserOutfitResponse(BaseModel):
@@ -113,7 +99,6 @@ class GetUserOutfitResponse(BaseModel):
 
     type: Literal["GetUserOutfitResponse"] = Field(alias="_type")
     outfit: list[Item]
-    rid: str
 
 
 class GetMessagesResponse(BaseModel):
@@ -121,14 +106,12 @@ class GetMessagesResponse(BaseModel):
 
     type: Literal["GetMessagesResponse"] = Field(alias="_type")
     messages: list[Message]
-    rid: str | None = None
 
 
 class SendMessageResponse(BaseModel):
     """The message sent success response."""
 
     type: Literal["SendMessageResponse"] = Field(alias="_type")
-    rid: str | None = None
 
 
 class GetConversationsResponse(BaseModel):
@@ -139,14 +122,12 @@ class GetConversationsResponse(BaseModel):
     type: Literal["GetConversationsResponse"] = Field(alias="_type")
     conversations: list[Conversation]
     not_joined: int
-    rid: str
 
 
 class LeaveConversationResponse(BaseModel):
     """The leave conversation success response."""
 
     type: Literal["LeaveConversationResponse"] = Field(alias="_type")
-    rid: str | None = None
 
 
 class BuyVoiceTimeResponse(BaseModel):
@@ -154,7 +135,6 @@ class BuyVoiceTimeResponse(BaseModel):
 
     type: Literal["BuyVoiceTimeResponse"] = Field(alias="_type")
     result: Literal["success", "insufficient_funds", "only_token_bought"]
-    rid: str | None = None
 
 
 class BuyRoomBoostResponse(BaseModel):
@@ -162,7 +142,6 @@ class BuyRoomBoostResponse(BaseModel):
 
     type: Literal["BuyRoomBoostResponse"] = Field(alias="_type")
     result: Literal["success", "insufficient_funds", "only_token_bought"]
-    rid: str | None = None
 
 
 class TipUserResponse(BaseModel):
@@ -170,14 +149,12 @@ class TipUserResponse(BaseModel):
 
     type: Literal["TipUserResponse"] = Field(alias="_type")
     result: Literal["success", "insufficient_funds"]
-    rid: str | None = None
 
 
 class SetOutfitResponse(BaseModel):
     """Set the outfit of a user."""
 
     type: Literal["SetOutfitResponse"] = Field(alias="_type")
-    rid: str | None = None
 
 
 class GetInventoryResponse(BaseModel):
@@ -185,7 +162,6 @@ class GetInventoryResponse(BaseModel):
 
     type: Literal["GetInventoryResponse"] = Field(alias="_type")
     items: list[Item]
-    rid: str | None = None
 
 
 class BuyItemResponse(BaseModel):
@@ -193,4 +169,3 @@ class BuyItemResponse(BaseModel):
 
     type: Literal["BuyItemResponse"] = Field(alias="_type")
     result: Literal["success", "insufficient_funds"]
-    rid: str | None = None
