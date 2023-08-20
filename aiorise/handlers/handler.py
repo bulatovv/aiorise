@@ -1,9 +1,9 @@
 from typing import Self, Callable
 
-from aiorise.actions.action import BaseAction
+from aiorise.actions.action import BaseAction, ActionFactory
 from aiorise.events.event_types import AnyEvent
 from aiorise.events.event_context import EventContext
-from aiorise.filters.filter import BaseFilter
+from aiorise.filters.filter import BaseFilter, FilterFactory
 
 import asyncio
 
@@ -25,21 +25,21 @@ class Handler:
         self._children.append(child)
 
     
-    def set_filter(self, f: BaseFilter) -> None:
-        self._filter = f
+    def set_filter(self, f: FilterFactory.SupportedTypes) -> None:
+        self._filter = FilterFactory.create(f)
 
 
-    def set_action(self, a: BaseAction) -> None:
-        self._action = a
+    def set_action(self, a: ActionFactory.SupportedTypes) -> None:
+        self._action = ActionFactory.create(a)
 
-    def set(self, f: BaseFilter) -> Callable[[BaseAction], None]:
-        def inner(a: BaseAction) -> None:
+    def set(self, f: FilterFactory.SupportedTypes) -> Callable[[ActionFactory.SupportedTypes], None]:
+        def inner(a: ActionFactory.SupportedTypes) -> None:
             self.set_filter(f)
             self.set_action(a)
         return inner
 
-    def child(self, f: BaseFilter) -> Callable[[BaseAction], None]:
-        def inner(a: BaseAction) -> None:
+    def child(self, f: FilterFactory.SupportedTypes) -> Callable[[ActionFactory.SupportedTypes], None]:
+        def inner(a: ActionFactory.SupportedTypes) -> None:
             child = Handler(self)
             child.set_filter(f)
             child.set_action(a)
